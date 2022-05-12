@@ -9,7 +9,6 @@ function Login() {
         email:'',
         password:'',
         error:false,
-        loding:false
     })
     const { email, password, error,} = data
     const navigat = useNavigate()

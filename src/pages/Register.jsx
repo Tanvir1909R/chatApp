@@ -38,7 +38,6 @@ function Register() {
             console.log(err);
         }
         navigat('/')
-        console.log(data);
     }
   return (
     <section className='register'>

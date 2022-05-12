@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Macondo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap');
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+:root{
+    --Black:#242526;
+    --White:white;
+    --Blue:#0084ff;
+    --Gray:gray;
+    --Red:#eb4034;
+    --Black2:#333;
+}
+body{
+    background-color: var(--Black);
+    color: var(--White);
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem calc((100vw - 1500px)/2);
+    color: var(--White);
+    border-bottom: 1px solid var(--Black2);
+}
+nav a{
+    color: var(--White);
+    text-decoration: none;
+}
+nav h3 a{
+    font-family:  'Macondo', cursive;
+    font-size: 2rem;
+}
+nav div a{
+    margin-right: 20px;
+}
+
+/* ---------------------------------register ------------------------------- */
+
+.register{
+    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 100px;
+    padding: 2rem ;
+    border-radius: 7px;
+    box-shadow: 1px 2px 10px var(--Gray);
+}
+.register h3{
+    text-align: center;
+    font-size: 2rem;
+    color: var(--Gray);
+}
+
+.register form{
+    margin-top: 20px;
+    padding: 0 2rem;
+}
+.input_Wrapper{
+    margin-top: 20px;
+}
+.input_Wrapper input{
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    margin-top: 10px;
+    border: 1px solid var(--White);
+    border-radius: 10px;
+}
+.resigter_btn{
+    text-align: center;
+    margin: 20px 0px;
+}
+.btn{
+    padding: 10px;
+    border-radius: 7px;
+    background-color: var(--Black);
+    color: var(--White);
+    cursor: pointer;
+    border: 1px solid var(--Gray);
+    transition: all .3s ease;
+    font-size: 1rem;
+}.btn:hover{
+    transform: scale(1.1);
+}
+.error{
+    color: var(--Red);
+    text-align: center;
+    margin: 10px 0px;
+}

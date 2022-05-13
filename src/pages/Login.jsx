@@ -9,6 +9,7 @@ function Login() {
         email:'',
         password:'',
         error:false,
+        loding:false
     })
     const { email, password, error,} = data
     const navigat = useNavigate()
@@ -18,7 +19,7 @@ function Login() {
     const handleSubmit = async (e)=>{
         e.preventDefault();
         setData({...data})
-        if( !password && !email){
+        if(!password && !email){
             setData({...data , error:true})
         }
         try {
@@ -31,11 +32,10 @@ function Login() {
             console.log(err);
         }
         navigat('/')
-        console.log(data);
     }
   return (
     <section className='register'>
-        <h3>Log In Your Account</h3>
+        <h3>Log in your Account</h3>
         <form className='form' onSubmit={handleSubmit}>
             <div className="input_Wrapper">
                 <label htmlFor="email">Email</label>

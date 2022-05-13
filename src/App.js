@@ -2,8 +2,8 @@ import React from 'react'
 import {Route , Routes} from 'react-router-dom'
 import NavBar from './components/NavBar'
 import Home from './pages/Home';
-import Register from './pages/Register'
 import Login from './pages/Login';
+import Register from './pages/Register'
 
 function App() {
   return (

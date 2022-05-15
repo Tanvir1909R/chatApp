@@ -1,11 +1,11 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import { BrowserRouter } from "react-router-dom";
 import AuthProvider from "./context/auth";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (

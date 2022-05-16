@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AuthProvider from "./context/auth";
 import PrivateRoute from "./components/PrivateRoute";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -15,9 +16,10 @@ function App() {
           <NavBar />
 
           <Routes>
-            <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/" element={<PrivateRoute> <Home/> </PrivateRoute>} />
+            <Route path="/profile" element={<PrivateRoute> <Profile/> </PrivateRoute>} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>

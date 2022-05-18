@@ -142,3 +142,54 @@ nav div a{
     color: var(--Gray);
     margin-bottom: 5px;
 }
+/* home---------------------------------------- */
+.home_container{
+    width: 100vw;
+    height: calc(100vh - 70px);
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    overflow: hidden;
+    position: relative;
+}
+.users_container{
+    margin-top: 20px;
+    border-right: 1px solid var(--Gray);
+    overflow-y: auto;
+};
+.users_wrapper{
+    margin-bottom: 20px;
+    cursor: pointer;
+    padding: 10px;
+}
+.user_info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.user_ditail{
+    display:flex;
+    align-items: center;
+}
+.user_ditail h4{
+    margin-left: 10px;
+}
+.avater{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid var(--Gray);
+    object-fit: cover;
+}
+.user_state{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+.online{
+    background-color: #34eb57;
+}
+.offline{
+    background-color: var(--Red);
+}

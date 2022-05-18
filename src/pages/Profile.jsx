@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Camra from "../svg/Camra";
 import { storage, db, auth } from "../firebase";
-import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
+import { ref, getDownloadURL, uploadBytes, deleteObject } from "firebase/storage";
 import { getDoc, doc, updateDoc } from "firebase/firestore";
+import IMG from '../fire/fire.png'
 function Profile() {
   const [img, setImg] = useState("");
   const [user, setUser] = useState();
@@ -25,6 +26,9 @@ function Profile() {
             avaterUrl: url,
             avaterPath: upload.ref.fullPath,
           });
+          if(user.avaterPath){
+            await deleteObject(ref(storage, user.avaterPath))
+          }
           setImg("");
         };
         uploadImg();
@@ -33,11 +37,11 @@ function Profile() {
       console.log(error);
     }
   }, [img]);
-  return (
+  return user ? (
     <section className="profile">
       <div className="profile_wrapper">
         <div className="user_img">
-          <img src="./img/profile.jpg" alt="" />
+          <img src={user.avaterUrl || IMG} alt="" />
           <div className="overlay">
             <div>
               <label htmlFor="photo">
@@ -54,14 +58,14 @@ function Profile() {
           </div>
         </div>
         <div className="user_dec">
-          <h3>User Name</h3>
-          <p>User Email</p>
+          <h3>{user.name}</h3>
+          <p>{user.email}</p>
           <hr />
-          <small>Joined On: ...</small>
+          <small>Joined On : {user.createAt.toDate().toDateString()}</small>
         </div>
       </div>
     </section>
-  );
+  ) : null
 }
 
 export default Profile;

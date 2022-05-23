@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { db, auth } from "../firebase";
-import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { db, auth, storage } from "../firebase";
+import {
+  collection,
+  query,
+  where,
+  onSnapshot,
+  addDoc,
+  Timestamp,
+} from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import IMG from "../fire/fire.png";
 import Massage from "../components/Massage";
 
 function Home() {
   const [users, setUsers] = useState([]);
   const [chat, setChat] = useState("");
+  const [text, setText] = useState("");
+  const [img, setImg] = useState("");
+
+  const user1 = auth.currentUser.uid;
   useEffect(() => {
     const userRef = collection(db, "users");
-    const q = query(userRef, where("uid", "not-in", [auth.currentUser.uid]));
+    const q = query(userRef, where("uid", "not-in", [user1]));
     const unsub = onSnapshot(q, (quarySnapshot) => {
       let userData = [];
       quarySnapshot.forEach((doc) => {
@@ -20,7 +32,32 @@ function Home() {
     return () => unsub();
   }, []);
   const selectUser = (userSelect) => {
-    setChat(userSelect)
+    setChat(userSelect);
+  };
+  const hendleSubmit = async (e) => {
+    e.preventDefault();
+    const user2 = chat.uid;
+    const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`;
+    let url;
+    if (img) {
+      const uploadImg = async () => {
+        const imgRef = ref(
+          storage,
+          `imges/${new Date().getTime()} - ${img.name}`
+        );
+        const upload = await uploadBytes(imgRef, img);
+        const Url = await getDownloadURL(ref(storage, upload.ref.fullPath));
+        url = Url;
+      };
+    }
+    await addDoc(collection(db, "massages", id, "chat"), {
+      text,
+      from: user1,
+      to: user2,
+      massageAt: Timestamp.fromDate(new Date()),
+      media: url || "",
+    });
+    setText("");
   };
   return (
     <div className="home_container">
@@ -58,10 +95,15 @@ function Home() {
       <div className="massage_container">
         {chat ? (
           <>
-          <div className="massage_user">
-            <h3> {chat.name} </h3>
-          </div>
-          <Massage />
+            <div className="massage_user">
+              <h3> {chat.name} </h3>
+            </div>
+            <Massage
+              text={text}
+              setText={setText}
+              hendleSubmit={hendleSubmit}
+              setImg={setImg}
+            />
           </>
         ) : (
           <h3 className="no_conv"> select a user to start </h3>

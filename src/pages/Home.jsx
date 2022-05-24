@@ -7,6 +7,7 @@ import {
   onSnapshot,
   addDoc,
   Timestamp,
+  orderBy,
 } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import IMG from "../fire/fire.png";
@@ -17,6 +18,7 @@ function Home() {
   const [chat, setChat] = useState("");
   const [text, setText] = useState("");
   const [img, setImg] = useState("");
+  const [msgs, setMsgs] = useState([]);
 
   const user1 = auth.currentUser.uid;
   useEffect(() => {
@@ -33,22 +35,33 @@ function Home() {
   }, []);
   const selectUser = (userSelect) => {
     setChat(userSelect);
+    const user2 = userSelect.uid;
+    const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`;
+    const massageRef = collection(db, "massages", id, "chat");
+    const q = query(massageRef, orderBy("massageAt", "asc"));
+
+    onSnapshot(q, (quarySnap) => {
+      let msg = [];
+      quarySnap.forEach((doc) => {
+        msg.push(doc.data());
+      });
+      setMsgs(msg);
+    });
   };
+  console.log(msgs);
   const hendleSubmit = async (e) => {
     e.preventDefault();
     const user2 = chat.uid;
     const id = user1 > user2 ? `${user1 + user2}` : `${user2 + user1}`;
     let url;
     if (img) {
-      const uploadImg = async () => {
-        const imgRef = ref(
-          storage,
-          `imges/${new Date().getTime()} - ${img.name}`
-        );
-        const upload = await uploadBytes(imgRef, img);
-        const Url = await getDownloadURL(ref(storage, upload.ref.fullPath));
-        url = Url;
-      };
+      const imgRef = ref(
+        storage,
+        `imges/${new Date().getTime()} - ${img.name}`
+      );
+      const upload = await uploadBytes(imgRef, img);
+      const Url = await getDownloadURL(ref(storage, upload.ref.fullPath));
+      url = Url;
     }
     await addDoc(collection(db, "massages", id, "chat"), {
       text,
@@ -97,6 +110,9 @@ function Home() {
           <>
             <div className="massage_user">
               <h3> {chat.name} </h3>
+            </div>
+            <div className="massages">
+
             </div>
             <Massage
               text={text}

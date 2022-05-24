@@ -229,3 +229,31 @@ nav div a{
  .massage_form .btn{
     margin-top:-10px ;
 }
+
+/* massages sec  --------------------------------------- */
+.massages{
+    height: calc(100vh - 200px);
+    overflow-y: auto;
+    border-bottom: 1px solid var(--Black2);
+}
+.massage_wrapper{
+    margin-top: 5px;
+    padding: 0 5px;
+}
+.massage_wrapper img{
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.massage_wrapper p{
+    padding: 10px;
+    display: inline-block;
+    max-width: 50%;
+    text-align: left;
+    border-radius: 5px;
+}
+.massage_wrapper small{
+    display: inline-block;
+    margin-top: 15px;
+    opacity: .8;
+}

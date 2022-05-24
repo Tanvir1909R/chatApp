@@ -5,8 +5,7 @@ function Massage({ text, setText, hendleSubmit, setImg }) {
   return (
     <form className="massage_form" onSubmit={hendleSubmit}>
       <label htmlFor="img">
-        {" "}
-        <Attach />{" "}
+        <Attach />
       </label>
       <input
         type="file"

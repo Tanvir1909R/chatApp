@@ -12,6 +12,7 @@ import {
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import IMG from "../fire/fire.png";
 import Massage from "../components/Massage";
+import MassageField from "../components/MassageField";
 
 function Home() {
   const [users, setUsers] = useState([]);
@@ -112,7 +113,9 @@ function Home() {
               <h3> {chat.name} </h3>
             </div>
             <div className="massages">
-
+              {
+                msgs.length ? msgs.map((msg,i)=> <MassageField key={i} msg={msg} />) : null 
+              }
             </div>
             <Massage
               text={text}

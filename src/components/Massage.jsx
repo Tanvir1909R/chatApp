@@ -1,4 +1,5 @@
 import React from "react";
+import Arrow from "../svg/Arrow";
 import Attach from "../svg/Attach";
 
 function Massage({ text, setText, hendleSubmit, setImg }) {
@@ -23,7 +24,7 @@ function Massage({ text, setText, hendleSubmit, setImg }) {
         />
       </div>
       <div>
-        <button className="btn"> Send </button>
+        <button className="btn"> <Arrow /> </button>
       </div>
     </form>
   );

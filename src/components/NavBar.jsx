@@ -18,7 +18,7 @@ function NavBar() {
   return (
     <nav>
       <h3>
-        <Link to="/">Massenger</Link>
+        <Link to="/">Massengers</Link>
       </h3>
       <div>
         {user ? (

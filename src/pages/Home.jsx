@@ -122,6 +122,7 @@ function Home() {
               setText={setText}
               hendleSubmit={hendleSubmit}
               setImg={setImg}
+              user1={user1}
             />
           </>
         ) : (

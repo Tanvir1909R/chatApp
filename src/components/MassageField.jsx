@@ -1,17 +1,17 @@
-import React from 'react'
-import Moment from 'react-moment'
+import React from "react";
+import { auth } from "../firebase";
 
-function MassageField( {msg} ) {
-  return <div className='massage_wrapper'>
-        <p>
-            { msg.media ? <img src={msg.media} alt='uploadImg'/> : null }
-            { msg.text }
-            <br />
-            <small>
-                <Moment fromNow={msg.massageAt.toDate()} ></Moment>
-            </small>
-        </p>
+function MassageField({ msg }) {
+    const user1 = auth.currentUser.uid
+  return (
+    <div className={`massage_wrapper ${msg.from === user1 ? "own" : ""}`}>
+      <p className={msg.from === user1 ? 'me' : 'friend'}>
+        {msg.media ? <img src={msg.media} alt="uploadImg" /> : null}
+        {msg.text}
+        <br />
+      </p>
     </div>
+  );
 }
 
-export default MassageField
+export default MassageField;
